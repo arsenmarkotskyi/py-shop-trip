@@ -29,9 +29,13 @@ class Customer:
         return total_cost
 
     def print_receipt(self, shop_name: str, shop_products: dict) -> None:
-        print(f"Date: {datetime(
-            2021, 4, 1, 12, 33, 41
-        ).strftime("%m/%d/%Y %H:%M:%S")}")
+
+        print(
+            f"Date: {datetime(
+                2021, 4, 1,
+                12, 33, 41
+            ).strftime("%m/%d/%Y %H:%M:%S")}"
+        )
         print(f"Thanks, {self.name}, for your purchase!")
         print("You have bought:")
         total_cost = 0
