@@ -17,7 +17,8 @@ class Customer:
     def distance_to(self, shop_location: dict) -> float:
         return math.sqrt(
             (shop_location[0] - self.location[0])
-            ** 2 + (shop_location[1] - self.location[1]) ** 2)
+            ** 2 + (shop_location[1] - self.location[1]) ** 2
+        )
 
     def travel_cost(self, distance: float, fuel_price: float) -> float:
         return (distance * self.car.fuel_consumption / 100) * fuel_price
