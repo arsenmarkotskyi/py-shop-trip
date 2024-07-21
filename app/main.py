@@ -9,27 +9,20 @@ def shop_trip() -> None:
         config = json.load(file)
 
     fuel_price = config["FUEL_PRICE"]
-    customers = []
-    shops = []
 
     for config_customer in config["customers"]:
-        car = Car(
-            config_customer["car"]["brand"],
-            config_customer["car"]["fuel_consumption"]
-        )
-        customer = Customer(
-            config_customer["name"], config_customer["product_cart"],
-            config_customer["location"], config_customer["money"], car
-        )
-        customers.append(customer)
+        customers = [
+            Customer(
+                config_customer["name"],
+                config_customer["product_cart"],
+                config_customer["location"],
+                config_customer["money"],
+                Car(**config_customer["car"])
+            )
+            for config_customer in config["customers"]
+        ]
 
-    shops = [
-        Shop(config_shop["name"],
-             config_shop["location"],
-             config_shop["products"])
-        for config_shop in config["shops"]
-    ]
-
+    shops = [Shop(**config_shop) for config_shop in config["shops"]]
     for customer in customers:
         print(f"{customer.name} has {customer.money} dollars")
         trips = []
