@@ -15,10 +15,7 @@ class Customer:
         self.car = car
 
     def distance_to(self, shop_location: dict) -> float:
-        return math.sqrt(
-            (shop_location[0] - self.location[0])
-            ** 2 + (shop_location[1] - self.location[1]) ** 2
-        )
+        return math.dist(self.location, shop_location)
 
     def travel_cost(self, distance: float, fuel_price: float) -> float:
         return (distance * self.car.fuel_consumption / 100) * fuel_price
@@ -35,15 +32,14 @@ class Customer:
             2021, 4, 1, 12, 33, 41
         ).strftime("%m/%d/%Y %H:%M:%S")
 
-        print(f"Date: {datetime_str}")
-
-        print(f"Thanks, {self.name}, for your purchase!")
-        print("You have bought:")
+        print(f"Date: {datetime_str}\n"
+              f"Thanks, {self.name}, for your purchase!\n"
+              f"You have bought:")
         total_cost = 0
         for product, quantity in self.product_cart.items():
             cost = shop_products.get(product, 0) * quantity
             total_cost += cost
             formatted_cost = f"{cost: .2f}".rstrip("0").rstrip(".")
             print(f"{quantity} {product}s for{formatted_cost} dollars")
-        print(f"Total cost is {total_cost} dollars")
-        print("See you again!\n")
+        print(f"Total cost is {total_cost} dollars\n"
+              f"See you again!\n")

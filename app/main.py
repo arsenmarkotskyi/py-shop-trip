@@ -12,17 +12,23 @@ def shop_trip() -> None:
     customers = []
     shops = []
 
-    for cust in config["customers"]:
-        car = Car(cust["car"]["brand"], cust["car"]["fuel_consumption"])
+    for config_customer in config["customers"]:
+        car = Car(
+            config_customer["car"]["brand"],
+            config_customer["car"]["fuel_consumption"]
+        )
         customer = Customer(
-            cust["name"], cust["product_cart"],
-            cust["location"], cust["money"], car
+            config_customer["name"], config_customer["product_cart"],
+            config_customer["location"], config_customer["money"], car
         )
         customers.append(customer)
 
-    for sh in config["shops"]:
-        shop = Shop(sh["name"], sh["location"], sh["products"])
-        shops.append(shop)
+    shops = [
+        Shop(config_shop["name"],
+             config_shop["location"],
+             config_shop["products"])
+        for config_shop in config["shops"]
+    ]
 
     for customer in customers:
         print(f"{customer.name} has {customer.money} dollars")
@@ -48,8 +54,8 @@ def shop_trip() -> None:
             customer.print_receipt(chosen_shop.name, chosen_shop.products)
             customer.location = [0, 0]
             customer.money -= total_cost
-            print(f"{customer.name} rides home")
-            print(f"{customer.name} now has{customer.money: .2f} dollars\n")
+            print(f"{customer.name} rides home\n"
+                  f"{customer.name} now has{customer.money: .2f} dollars\n")
 
     print(f"{customer.name} doesn't have enough money "
           f"to make a purchase in any shop")
