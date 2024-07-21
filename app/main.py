@@ -10,17 +10,16 @@ def shop_trip() -> None:
 
     fuel_price = config["FUEL_PRICE"]
 
-    for config_customer in config["customers"]:
-        customers = [
-            Customer(
-                config_customer["name"],
-                config_customer["product_cart"],
-                config_customer["location"],
-                config_customer["money"],
-                Car(**config_customer["car"])
-            )
-            for config_customer in config["customers"]
-        ]
+    customers = [
+        Customer(
+            config_customer["name"],
+            config_customer["product_cart"],
+            config_customer["location"],
+            config_customer["money"],
+            Car(**config_customer["car"])
+        )
+        for config_customer in config["customers"]
+    ]
 
     shops = [Shop(**config_shop) for config_shop in config["shops"]]
     for customer in customers:
