@@ -44,7 +44,6 @@ def shop_trip() -> None:
             print(f"{customer.name} rides to {chosen_shop.name}\n")
             customer.location = chosen_shop.location
             customer.print_receipt(chosen_shop.name, chosen_shop.products)
-            customer.location = [0, 0]
             customer.money -= total_cost
             print(f"{customer.name} rides home\n"
                   f"{customer.name} now has{customer.money: .2f} dollars\n")
